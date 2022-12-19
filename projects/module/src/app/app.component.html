@@ -2,8 +2,12 @@
     <h2>TODO title</h2>
     <hr>
 
-    <div fxLayout="row wrap" fxLayoutAlign="space-evenly start">
-
+    <div fxLayout="row" fxLayoutAlign="center start">
+        <ilpn-file-upload [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN"></ilpn-file-upload>
+    </div>
+    <hr class="dotted">
+    <div fxLayout="row" fxLayoutAlign="center start">
+        <ilpn-file-upload [descriptionText]="'drop a set of specification Petri nets here'" [fileDisplay]="FD_PN"></ilpn-file-upload>
     </div>
 
 </ilpn-page-layout>
