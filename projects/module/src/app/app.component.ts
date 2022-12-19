@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FD_PETRI_NET, PetriNetParserService} from 'ilpn-components';
+import {DropFile, FD_PETRI_NET, PetriNetParserService} from 'ilpn-components';
 
 @Component({
     selector: 'app-root',
@@ -10,5 +10,13 @@ export class AppComponent {
 
     public readonly FD_PN = FD_PETRI_NET;
     constructor(private _parser: PetriNetParserService) {
+    }
+
+    modelUpload(files: Array<DropFile>) {
+        console.log(files);
+    }
+
+    specUpload(files: Array<DropFile>) {
+        console.log(files);
     }
 }

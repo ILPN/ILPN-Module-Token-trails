@@ -3,11 +3,11 @@
     <hr>
 
     <div fxLayout="row" fxLayoutAlign="center start">
-        <ilpn-file-upload [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN"></ilpn-file-upload>
+        <ilpn-file-upload [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
     </div>
     <hr class="dotted">
     <div fxLayout="row" fxLayoutAlign="center start">
-        <ilpn-file-upload [descriptionText]="'drop a set of specification Petri nets here'" [fileDisplay]="FD_PN"></ilpn-file-upload>
+        <ilpn-file-upload [descriptionText]="'drop a set of specification Petri nets here'" [fileDisplay]="FD_PN" (fileContent)="specUpload($event)"></ilpn-file-upload>
     </div>
 
 </ilpn-page-layout>
