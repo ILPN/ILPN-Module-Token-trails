@@ -17,11 +17,23 @@ h2 {
 
 hr {
     border-color: lightgray;
-    margin-top: 30px;
-    margin-bottom: 30px;
     width: 100%;
+}
+
+.top {
+    margin-top: 30px;
+    margin-bottom: 8px;
+}
+
+.top-complement {
+    margin-top: 22px;
 }
 
 .dotted {
     border-style: dotted;
+}
+
+.drawing-area {
+    width: 100%;
+    height: 400px;
 }

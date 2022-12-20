@@ -1,13 +1,19 @@
 <ilpn-page-layout>
     <h2>TODO title</h2>
-    <hr>
+    <hr class="top">
 
     <div fxLayout="row" fxLayoutAlign="center start">
-        <ilpn-file-upload [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
+        <ilpn-file-upload class="top-complement" *ngIf="model$ | async | hasNoNet; else showModel" [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
+        <ng-template #showModel>
+            <ilpn-pn-display class="drawing-area" [petriNet$]="modelNet$"></ilpn-pn-display>
+        </ng-template>
     </div>
     <hr class="dotted">
     <div fxLayout="row" fxLayoutAlign="center start">
-        <ilpn-file-upload [descriptionText]="'drop a set of specification Petri nets here'" [fileDisplay]="FD_PN" (fileContent)="specUpload($event)"></ilpn-file-upload>
+        <ilpn-file-upload *ngIf="specs$ | async | hasNoNet; else showSpecs" [descriptionText]="'drop a set of specification Petri nets here'" [fileDisplay]="FD_PN" (fileContent)="specUpload($event)"></ilpn-file-upload>
+        <ng-template #showSpecs>
+            <ilpn-pn-display class="drawing-area" [petriNet$]="specFirstNet$"></ilpn-pn-display>
+        </ng-template>
     </div>
 
 </ilpn-page-layout>
