@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
-import {DropFile, FD_PETRI_NET, PetriNet, PetriNetParserService} from 'ilpn-components';
-import {BehaviorSubject, combineLatest, filter, map, Observable, Subscription} from 'rxjs';
+import {DropFile, FD_PETRI_NET, PetriNet, PetriNetParserService, TokenTrailValidatorService} from 'ilpn-components';
+import {BehaviorSubject, combineLatest, filter, map, Observable, Subscription, take} from 'rxjs';
 
 
 @Component({
@@ -20,7 +20,8 @@ export class AppComponent implements OnDestroy {
 
     private _latest$: Subscription;
 
-    constructor(private _parser: PetriNetParserService) {
+    constructor(private _parser: PetriNetParserService,
+                private _tokenTrails: TokenTrailValidatorService) {
         this.model$ = new BehaviorSubject<PetriNet | undefined>(undefined);
         this.specs$ = new BehaviorSubject<Array<PetriNet>>([]);
         this.modelNet$ = this.model$.pipe(filter(v => v !== undefined)) as Observable<PetriNet>;
@@ -47,7 +48,8 @@ export class AppComponent implements OnDestroy {
     }
 
     private computeTokenTrails(model: PetriNet, specs: Array<PetriNet>) {
-
-
+        this._tokenTrails.validate(model, specs[0]).pipe(take(1)).subscribe(r => {
+            console.debug(r);
+        })
     }
 }
