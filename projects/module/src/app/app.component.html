@@ -5,7 +5,7 @@
     <div fxLayout="row" fxLayoutAlign="center start">
         <ilpn-file-upload class="top-complement" *ngIf="model$ | async | hasNoNet; else showModel" [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
         <ng-template #showModel>
-            <ilpn-pn-display class="drawing-area" [petriNet$]="modelNet$"></ilpn-pn-display>
+            <ilpn-pn-display class="drawing-area" [petriNet$]="modelNet$" [placeFill$]="modelFill$"></ilpn-pn-display>
         </ng-template>
     </div>
     <hr class="dotted">

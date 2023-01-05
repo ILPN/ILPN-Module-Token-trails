@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {DropFile, FD_PETRI_NET, PetriNet, PetriNetParserService, TokenTrailValidatorService} from 'ilpn-components';
-import {BehaviorSubject, combineLatest, filter, map, Observable, Subscription, take} from 'rxjs';
+import {BehaviorSubject, combineLatest, filter, map, Observable, Subject, Subscription, take} from 'rxjs';
 
 
 @Component({
@@ -14,6 +14,7 @@ export class AppComponent implements OnDestroy {
 
     public model$: BehaviorSubject<PetriNet | undefined>;
     public specs$: BehaviorSubject<Array<PetriNet>>;
+    public modelFill$: Subject<Map<string, string>>;
 
     public modelNet$: Observable<PetriNet>;
     public specFirstNet$: Observable<PetriNet>;
@@ -24,6 +25,7 @@ export class AppComponent implements OnDestroy {
                 private _tokenTrails: TokenTrailValidatorService) {
         this.model$ = new BehaviorSubject<PetriNet | undefined>(undefined);
         this.specs$ = new BehaviorSubject<Array<PetriNet>>([]);
+        this.modelFill$ = new Subject<Map<string, string>>();
         this.modelNet$ = this.model$.pipe(filter(v => v !== undefined)) as Observable<PetriNet>;
         this.specFirstNet$ = this.specs$.pipe(filter(v => v.length > 0), map(v => v[0]));
         this._latest$ = combineLatest([this.model$, this.specs$]).subscribe( ([model, specs]) => {
@@ -50,6 +52,12 @@ export class AppComponent implements OnDestroy {
     private computeTokenTrails(model: PetriNet, specs: Array<PetriNet>) {
         this._tokenTrails.validate(model, specs[0]).pipe(take(1)).subscribe(r => {
             console.debug(r);
+
+            const fill = new Map<string, string>();
+            for (const result of r) {
+                fill.set(result.placeId, result.valid ? '#50ff50' : '#ff5050');
+            }
+            this.modelFill$.next(fill);
         })
     }
 }
