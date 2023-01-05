@@ -1,5 +1,12 @@
 import {Component, OnDestroy} from '@angular/core';
-import {DropFile, FD_PETRI_NET, PetriNet, PetriNetParserService, TokenTrailValidatorService} from 'ilpn-components';
+import {
+    DropFile,
+    FD_PETRI_NET,
+    Marking,
+    PetriNet,
+    PetriNetParserService,
+    TokenTrailValidatorService
+} from 'ilpn-components';
 import {BehaviorSubject, combineLatest, filter, map, Observable, Subject, Subscription, take} from 'rxjs';
 
 
@@ -15,20 +22,24 @@ export class AppComponent implements OnDestroy {
     public model$: BehaviorSubject<PetriNet | undefined>;
     public specs$: BehaviorSubject<Array<PetriNet>>;
     public modelFill$: Subject<Map<string, string>>;
+    public specMarking$: Subject<Marking>;
 
     public modelNet$: Observable<PetriNet>;
     public specFirstNet$: Observable<PetriNet>;
 
     private _latest$: Subscription;
+    private _tokenTrail: Map<string, Marking> | undefined;
 
     constructor(private _parser: PetriNetParserService,
                 private _tokenTrails: TokenTrailValidatorService) {
         this.model$ = new BehaviorSubject<PetriNet | undefined>(undefined);
         this.specs$ = new BehaviorSubject<Array<PetriNet>>([]);
         this.modelFill$ = new Subject<Map<string, string>>();
+        this.specMarking$ = new Subject<Marking>();
+
         this.modelNet$ = this.model$.pipe(filter(v => v !== undefined)) as Observable<PetriNet>;
         this.specFirstNet$ = this.specs$.pipe(filter(v => v.length > 0), map(v => v[0]));
-        this._latest$ = combineLatest([this.model$, this.specs$]).subscribe( ([model, specs]) => {
+        this._latest$ = combineLatest([this.model$, this.specs$]).subscribe(([model, specs]) => {
             if (model !== undefined && specs.length > 0) {
                 this.computeTokenTrails(model, specs);
             }
@@ -49,13 +60,28 @@ export class AppComponent implements OnDestroy {
         console.debug('specs', this.specs$.value);
     }
 
+    modelPlaceClicked(pid: string) {
+        // TODO no click on drag
+        if (this._tokenTrail === undefined) {
+            return;
+        }
+        this.specMarking$.next(this._tokenTrail.get(pid) ?? new Marking({}));
+    }
+
     private computeTokenTrails(model: PetriNet, specs: Array<PetriNet>) {
+        this._tokenTrail = undefined;
         this._tokenTrails.validate(model, specs[0]).pipe(take(1)).subscribe(r => {
             console.debug(r);
+
+            this._tokenTrail = new Map<string, Marking>();
 
             const fill = new Map<string, string>();
             for (const result of r) {
                 fill.set(result.placeId, result.valid ? '#50ff50' : '#ff5050');
+
+                if (result.valid) {
+                    this._tokenTrail.set(result.placeId, result.tokenTrail);
+                }
             }
             this.modelFill$.next(fill);
         })

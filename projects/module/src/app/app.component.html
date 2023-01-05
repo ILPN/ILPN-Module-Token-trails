@@ -5,14 +5,14 @@
     <div fxLayout="row" fxLayoutAlign="center start">
         <ilpn-file-upload class="top-complement" *ngIf="model$ | async | hasNoNet; else showModel" [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
         <ng-template #showModel>
-            <ilpn-pn-display class="drawing-area" [petriNet$]="modelNet$" [placeFill$]="modelFill$"></ilpn-pn-display>
+            <ilpn-pn-display class="drawing-area" [petriNet$]="modelNet$" [placeFill$]="modelFill$" (placeClicked)="modelPlaceClicked($event)"></ilpn-pn-display>
         </ng-template>
     </div>
     <hr class="dotted">
     <div fxLayout="row" fxLayoutAlign="center start">
         <ilpn-file-upload *ngIf="specs$ | async | hasNoNet; else showSpecs" [descriptionText]="'drop a set of specification Petri nets here'" [fileDisplay]="FD_PN" (fileContent)="specUpload($event)"></ilpn-file-upload>
         <ng-template #showSpecs>
-            <ilpn-pn-display class="drawing-area" [petriNet$]="specFirstNet$"></ilpn-pn-display>
+            <ilpn-pn-display class="drawing-area" [petriNet$]="specFirstNet$" [marking$]="specMarking$"></ilpn-pn-display>
         </ng-template>
     </div>
 
