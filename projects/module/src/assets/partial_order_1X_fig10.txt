@@ -1,0 +1,35 @@
+.type pn
+.transitions
+e5 A
+e6 B
+e7 X
+e8 B
+e9 C
+e10 D
+.places
+c7 1
+c8 0
+c9 0
+c10 0
+c11 0
+c12 0
+c13 0
+c14 0
+c15 0
+.arcs
+c7 e5 1
+e5 c8 1
+e5 c9 1
+c8 e6 1
+c9 e9 1
+e6 c10 1
+c10 e7 1
+e7 c11 1
+e7 c12 1
+c11 e8 1
+c12 e9 1
+e8 c13 1
+c13 e10 1
+e9 c14 1
+c14 e10 1
+e10 c15 1

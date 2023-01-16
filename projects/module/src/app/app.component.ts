@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {
     DropFile,
     FD_PETRI_NET,
+    FD_PETRI_NET_SPEC,
     Marking,
     PetriNet,
     PetriNetParserService,
@@ -18,6 +19,7 @@ import {BehaviorSubject, combineLatest, filter, map, Observable, Subject, Subscr
 export class AppComponent implements OnDestroy {
 
     public readonly FD_PN = FD_PETRI_NET;
+    public readonly FD_SPEC = FD_PETRI_NET_SPEC;
 
     private readonly ENABLED_PLACE = '#a0ffa0';
     private readonly ENABLED_PLACE_SELECTED = '#30d030';

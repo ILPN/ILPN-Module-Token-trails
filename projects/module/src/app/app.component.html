@@ -3,17 +3,43 @@
     <hr class="top">
 
     <div fxLayout="row" fxLayoutAlign="center start">
-        <ilpn-file-upload class="top-complement" *ngIf="model$ | async | hasNoNet; else showModel" [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
+        <ilpn-file-upload class="top-complement" *ngIf="model$ | async | hasNoNet; else showModel" [descriptionText]="'drop or upload the model Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
         <ng-template #showModel>
             <ilpn-pn-display class="drawing-area" [petriNet$]="modelNet$" [placeFill$]="modelFill$" (placeClicked)="modelPlaceClicked($event)"></ilpn-pn-display>
         </ng-template>
     </div>
     <hr class="dotted">
     <div fxLayout="row" fxLayoutAlign="center start">
-        <ilpn-file-upload *ngIf="specs$ | async | hasNoNet; else showSpecs" [descriptionText]="'drop a set of specification Petri nets here'" [fileDisplay]="FD_PN" (fileContent)="specUpload($event)"></ilpn-file-upload>
+        <ilpn-file-upload *ngIf="specs$ | async | hasNoNet; else showSpecs" [descriptionText]="'drop or upload the specification labeled Petri net here'" [fileDisplay]="FD_SPEC" (fileContent)="specUpload($event)"></ilpn-file-upload>
         <ng-template #showSpecs>
             <ilpn-pn-display class="drawing-area" [petriNet$]="specFirstNet$" [marking$]="specMarking$"></ilpn-pn-display>
         </ng-template>
+    </div>
+
+    <hr>
+    <h2>download examples</h2>
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayout.sm="column" fxLayoutAlign.sm="space-between center">
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Model Petri net" description="The model Petri net from figure 1." link="assets/model_fig1.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Firing sequence" description="A labeled Petri net modelling the firing sequence ABXCBD from figure 5." link="assets/firing_sequence_fig5.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="State graph" description="A labeled Petri net modelling the state graph from figure 7." link="assets/state_graph_fig7.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Partial order" description="A set of 3 labeled Petri nets modelling the partial orders from figure 10." [link]="['assets/partial_order_0X_fig10.txt', 'assets/partial_order_1X_fig10.txt', 'assets/partial_order_2X_fig10.txt']" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Prime event structure" description="A labeled Petri net modelling the prime event structure from figure 11." link="assets/prime_event_structure_fig11.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Model with 3 tokens" description="The model Petri net from figure 1, with tripple the initial marking." link="assets/model_fig12a.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Specification with 3 tokens" description="The first specification from figure 12, containing 3 tokens in the initial marking." link="assets/specification_fig12a.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Model with extra tokens" description="The model Petri net from figure 1, with additional tokens in the initial marking of places p2, p3 and p7." link="assets/model_fig12b.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Spec with extra token" description="The second specification from figure 12, containing an extra token later in the sequence." link="assets/specification_fig12b.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Model without p3 and p5" description="The model Petri net from figure 1, without the places p3 and p5." link="assets/model_fig13.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="B or BXB" description="The first specification from figure 13, containing an alternative between B and BXB." link="assets/specification_fig13a.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Loop with X" description="The second specification from figure 13, containing a loop with X." link="assets/specification_fig13b.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Model loop with Y" description="The first model Petri net from figure 15." link="assets/model_fig15a.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Loop with Y" description="The first specification from figure 15, containing a loop with Y." link="assets/specification_fig15a.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Model arc weights" description="The second model Petri net from figure 15." link="assets/model_fig15b.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Arc weights" description="The second specification from figure 15, containing arc weights." link="assets/specification_fig15b.txt" [download]="true" [descriptionLines]="4"></ilpn-descriptive-link>
     </div>
 
 </ilpn-page-layout>
