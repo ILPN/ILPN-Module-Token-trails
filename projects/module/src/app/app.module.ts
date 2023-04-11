@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_BASE_HREF, PlatformLocation} from '@angular/common';
 import {HasNetPipe} from './pipe/has-net.pipe';
 import {HasNoNetPipe} from './pipe/has-no-net.pipe';
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import {HasNoNetPipe} from './pipe/has-no-net.pipe';
         ReactiveFormsModule,
         MatSlideToggleModule,
         BrowserAnimationsModule,
+        AppRoutingModule,
     ],
     providers: [
         {
