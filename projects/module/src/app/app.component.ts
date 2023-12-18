@@ -6,6 +6,7 @@ import {
     Marking,
     PetriNet,
     PetriNetParserService,
+    TokenTrailValidationResult,
     TokenTrailValidatorService
 } from 'ilpn-components';
 import {BehaviorSubject, combineLatest, filter, map, Observable, Subject, Subscription, take} from 'rxjs';
@@ -106,6 +107,9 @@ export class AppComponent implements OnDestroy {
     private computeTokenTrails(model: PetriNet, specs: Array<PetriNet>) {
         this._tokenTrail = undefined;
         this._tokenTrails.validate(model, specs[0]).pipe(take(1)).subscribe(r => {
+            for (const solution of r) {
+                this.removeNetPrefixFromMarking(solution);
+            }
             console.debug(r);
 
             this._tokenTrail = new Map<string, Marking>();
@@ -139,5 +143,18 @@ export class AppComponent implements OnDestroy {
             default:
                 return '#0000ff';
         }
+    }
+
+    private removeNetPrefixFromMarking(r: TokenTrailValidationResult) {
+        const trimmedMarking = new Marking();
+        for (const pid of r.tokenTrail.getKeys()) {
+            if (pid.startsWith('n0_')) {
+                trimmedMarking.set(pid.substring(3), r.tokenTrail.get(pid)!);
+            } else {
+                console.error(`solution marking contains places without net prefixes! ${pid}`);
+                trimmedMarking.set(pid, r.tokenTrail.get(pid)!);
+            }
+        }
+        r.tokenTrail = trimmedMarking;
     }
 }
