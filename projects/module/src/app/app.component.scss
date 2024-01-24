@@ -25,12 +25,12 @@ hr {
     margin-bottom: 8px;
 }
 
-.top-complement {
-    margin-top: 22px;
-}
-
 .dotted {
+    position: relative;
     border-style: dotted;
+    top: 100px;
+    z-index: 1;
+    margin: 0;
 }
 
 .drawing-area {
@@ -43,4 +43,14 @@ hr {
 
 .margin-bottom {
     margin-bottom: 16px;
+}
+
+.upload-margin {
+    margin-top: 22px;
+    margin-bottom: 16px;
+}
+
+.upload-position {
+    position: relative;
+    z-index: 2;
 }

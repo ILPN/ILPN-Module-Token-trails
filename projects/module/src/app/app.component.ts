@@ -76,6 +76,10 @@ export class AppComponent implements OnDestroy {
         console.debug('specs', this.specs$.value);
     }
 
+    jointUpload(files: Array<DropFile>) {
+
+    }
+
     modelPlaceClicked(pid: string) {
         // TODO no click on drag
         if (this._tokenTrail === undefined || this._currentFill === undefined) {

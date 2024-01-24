@@ -4,12 +4,15 @@
     <hr class="top">
 
     <div fxLayout="row" fxLayoutAlign="center start">
-        <ilpn-file-upload class="top-complement" *ngIf="model$ | async | hasNoNet; else showModel" [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
+        <ilpn-file-upload *ngIf="model$ | async | hasNoNet; else showModel" [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
         <ng-template #showModel>
             <ilpn-pn-display class="drawing-area" [petriNet$]="modelNet$" [placeFill$]="modelFill$" (placeClicked)="modelPlaceClicked($event)"></ilpn-pn-display>
         </ng-template>
     </div>
     <hr class="dotted">
+    <div fxLayout="row" fxLayoutAlign="center start" class="upload-position">
+        <ilpn-file-upload class="upload-margin" *ngIf="model$ | async | hasNoNet" [descriptionText]="'Upload a Petri net or a labelled net'" [squareContent]="'🦊'" (fileContent)="jointUpload($event)"></ilpn-file-upload>
+    </div>
     <div fxLayout="row" fxLayoutAlign="center start">
         <ilpn-file-upload *ngIf="specs$ | async | hasNoNet; else showSpecs" [descriptionText]="'drop a labeled net here'" [fileDisplay]="FD_SPEC" (fileContent)="specUpload($event)" class="margin-bottom"></ilpn-file-upload>
         <ng-template #showSpecs>
@@ -18,7 +21,7 @@
     </div>
 
     <hr class="margin-bottom">
-    <h2>download examples</h2>
+    <h2>examples</h2>
     <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayout.sm="column" fxLayoutAlign.sm="space-between center">
         <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net" description="Figure 1. A Petri net." link="assets/model_fig1.txt" [download]="true"></ilpn-descriptive-link>
         <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Firing sequence" description="Figure 5. A labeled net modelling the firing sequence ABXCBD." link="assets/firing_sequence_fig5.txt" [download]="true"></ilpn-descriptive-link>
