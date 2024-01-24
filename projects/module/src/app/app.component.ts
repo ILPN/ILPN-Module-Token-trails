@@ -34,6 +34,7 @@ export class AppComponent implements OnDestroy {
 
     public modelNet$: Observable<PetriNet>;
     public specFirstNet$: Observable<PetriNet>;
+    public combined$: Observable<boolean>;
 
     private _latest$: Subscription;
     private _tokenTrail: Map<string, Marking> | undefined;
@@ -54,6 +55,9 @@ export class AppComponent implements OnDestroy {
                 this.computeTokenTrails(model, specs);
             }
         });
+        this.combined$ = combineLatest([this.model$, this.specs$]).pipe(map(arr => {
+            return arr[0] === undefined || arr[1] === undefined || (arr[1] !== undefined && arr[1].length === 0);
+        }));
     }
 
     ngOnDestroy(): void {
@@ -77,7 +81,39 @@ export class AppComponent implements OnDestroy {
     }
 
     jointUpload(files: Array<DropFile>) {
+        this.clearState();
+        const parsed = files.map(f => this._parser.parse(f.content)).filter(v => !!v) as Array<PetriNet>;
+        if(parsed.length === 0) {
+            return;
+        }
+        console.debug('parsed nets', parsed);
 
+        for (const net of parsed) {
+            if (this.model$.value !== undefined && this.specs$.value !== undefined && this.specs$.value.length > 0) {
+                break;
+            }
+            const labels = new Set<string>();
+            let labelled = false;
+            for (const t of net.getTransitions()) {
+                if (t.label === undefined) {
+                    labelled = true;
+                    break;
+                }
+                if (labels.has(t.label)) {
+                    labelled = true;
+                    break;
+                }
+                labels.add(t.label);
+            }
+
+            if (!labelled && this.model$.value === undefined) {
+                this.model$.next(net);
+                continue;
+            }
+            if (this.specs$.value === undefined || this.specs$.value.length === 0) {
+                this.specs$.next([net]);
+            }
+        }
     }
 
     modelPlaceClicked(pid: string) {

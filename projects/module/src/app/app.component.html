@@ -4,17 +4,19 @@
     <hr class="top">
 
     <div fxLayout="row" fxLayoutAlign="center start">
-        <ilpn-file-upload *ngIf="model$ | async | hasNoNet; else showModel" [descriptionText]="'drop a Petri net here'" [fileDisplay]="FD_PN" (fileContent)="modelUpload($event)"></ilpn-file-upload>
+        <span *ngIf="model$ | async | hasNoNet; else showModel" class="margin-top-missing"><span class="inline-emoji red">♥</span> Missing a Petri net in .PNML or in .JSON format <span class="inline-emoji red">♥</span></span>
         <ng-template #showModel>
             <ilpn-pn-display class="drawing-area" [petriNet$]="modelNet$" [placeFill$]="modelFill$" (placeClicked)="modelPlaceClicked($event)"></ilpn-pn-display>
         </ng-template>
     </div>
     <hr class="dotted">
-    <div fxLayout="row" fxLayoutAlign="center start" class="upload-position">
-        <ilpn-file-upload class="upload-margin" *ngIf="model$ | async | hasNoNet" [descriptionText]="'Upload a Petri net or a labelled net'" [squareContent]="'🦊'" (fileContent)="jointUpload($event)"></ilpn-file-upload>
+    <div fxLayout="row" fxLayoutAlign="center start" class="pos-anchor">
+        <div class="upload-position">
+            <ilpn-file-upload class="upload-margin" *ngIf="combined$ | async" [descriptionText]="'Upload a Petri net or a labelled net'" [squareContent]="'🦊'" (fileContent)="jointUpload($event)"></ilpn-file-upload>
+        </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center start">
-        <ilpn-file-upload *ngIf="specs$ | async | hasNoNet; else showSpecs" [descriptionText]="'drop a labeled net here'" [fileDisplay]="FD_SPEC" (fileContent)="specUpload($event)" class="margin-bottom"></ilpn-file-upload>
+        <span *ngIf="specs$ | async | hasNoNet; else showSpecs" class="margin-bottom-missing"><span class="inline-emoji">♥</span> Missing a labelled net in .PNML or in .JSON format <span class="inline-emoji">♥</span></span>
         <ng-template #showSpecs>
             <ilpn-pn-display class="drawing-area" [petriNet$]="specFirstNet$" [marking$]="specMarking$"></ilpn-pn-display>
         </ng-template>

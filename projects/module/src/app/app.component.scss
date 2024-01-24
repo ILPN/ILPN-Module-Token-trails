@@ -28,9 +28,7 @@ hr {
 .dotted {
     position: relative;
     border-style: dotted;
-    top: 100px;
     z-index: 1;
-    margin: 0;
 }
 
 .drawing-area {
@@ -39,6 +37,16 @@ hr {
     border-width: 1px;
     border-style: none dotted none dotted;
     border-color: lightgray;
+}
+
+.margin-top-missing {
+    margin-top: 80px;
+    margin-bottom: 120px;
+}
+
+.margin-bottom-missing {
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
 .margin-bottom {
@@ -50,7 +58,20 @@ hr {
     margin-bottom: 16px;
 }
 
-.upload-position {
+.pos-anchor {
     position: relative;
+}
+
+.upload-position {
+    position: absolute;
     z-index: 2;
+    top: -90px;
+}
+
+.inline-emoji {
+    font-size: x-large;
+}
+
+.red {
+    color: red;
 }
