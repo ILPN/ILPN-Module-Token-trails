@@ -1,6 +1,6 @@
 <ilpn-page-layout>
-    <h2>Validate a labeled net in a Petri net - This algorithm is submitted as
-        <br><i>Token Trail Semantics – Modeling Behavior of Petri Nets with Labeled Petri Nets</i> by R. Bergenthum, S. Folz-Weinstein and J. Kovář to PETRI NETS 2023.</h2>
+    <h2>Validate a labelled net in a Petri net - This algorithm is submitted as
+        <br><i>Token Trail Semantics – Modeling Behavior of Petri Nets with Labelled Petri Nets</i> by R. Bergenthum, S. Folz-Weinstein and J. Kovář to PETRI NETS 2023.</h2>
     <hr class="top">
 
     <div fxLayout="row" fxLayoutAlign="center start">
@@ -12,7 +12,7 @@
     <hr class="dotted">
     <div fxLayout="row" fxLayoutAlign="center start" class="pos-anchor">
         <div class="upload-position">
-            <ilpn-file-upload class="upload-margin" *ngIf="combined$ | async" [descriptionText]="'Upload a Petri net or a labelled net'" [squareContent]="'🦊'" (fileContent)="jointUpload($event)"></ilpn-file-upload>
+            <ilpn-file-upload class="upload-margin" *ngIf="combined$ | async" [descriptionText]="'Upload a Petri net and a labelled net'" [squareContent]="'🦊'" (fileContent)="jointUpload($event)"></ilpn-file-upload>
         </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center start">
@@ -22,30 +22,41 @@
         </ng-template>
     </div>
 
-    <hr class="margin-bottom">
-    <h2>examples</h2>
+    <hr class="margin-divider-examples">
+    <h2>examples (simply drag-and-drop the boxes onto the 🦊)</h2>
     <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayout.sm="column" fxLayoutAlign.sm="space-between center">
-        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net" description="Figure 1. A Petri net." link="assets/model_fig1.txt" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Firing sequence" description="Figure 5. A labeled net modelling the firing sequence ABXCBD." link="assets/firing_sequence_fig5.txt" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="State graph" description="Figure 7. A labeled net modelling a state graph." link="assets/state_graph_fig7.txt" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Partial order" description="Figure 10. A set of 3 labeled nets modelling runs." [link]="['assets/partial_order_0X_fig10.txt', 'assets/partial_order_1X_fig10.txt', 'assets/partial_order_2X_fig10.txt']" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Prime event structure" description="Figure 11. A labeled net modelling a prime event structure." link="assets/prime_event_structure_fig11.txt" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Partial order" description="Figure 4. A partial order net." [link]="['assets/2024/model_fig1.json','assets/2024/partial_order_fig4.json']" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="State graph" description="Figure 5. A state graph net." [link]="['assets/2024/model_fig1.json','assets/2024/state_graph_fig5.json']" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Labelled net, B xor BXB" description="Figure 6 (13). A labelled net modeling an alternative between B and BXB." [link]="['assets/2024/model_fig1.json','assets/2024/specification_fig6.json']" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Labelled net, loop with X" description="Figure 7. A labelled net modeling a loop with X." [link]="['assets/2024/model_fig1.json','assets/2024/specification_fig7.json']" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Counter example morphism" description="Figure 10. Counter example to net morphisms." [link]="['assets/2024/model_fig9.json','assets/2024/firing_sequence_fig10.json']" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Counter example converse" description="Figure 12. Counter example to the converse of Corollary 2." [link]="['assets/2024/model_fig1.json','assets/2024/specification_fig12.json']" [download]="true"></ilpn-descriptive-link>
+    </div>
 
-        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, multiple tokens" description="The Petri net from Figure 1, with tripple the initial marking." link="assets/model_fig12a.txt" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Firing sequence, 3 tokens" description="Figure 12. A labeled net with 3 tokens in the initial marking." link="assets/specification_fig12a.txt" [download]="true"></ilpn-descriptive-link>
+    <hr class="margin-divider-old-examples">
+    <h2>examples from <i>Token Trails I (2023)</i></h2>
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayout.sm="column" fxLayoutAlign.sm="space-between center">
+<!--        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net" description="Figure 1. A Petri net." link="assets/2023/model_fig1.txt" [download]="true"></ilpn-descriptive-link>-->
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Firing sequence" description="Figure 5. A labelled net modelling the firing sequence ABXCBD." [link]="['assets/2023/model_fig1.txt','assets/2023/firing_sequence_fig5.txt']" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="State graph" description="Figure 7. A labelled net modelling a state graph." [link]="['assets/2023/model_fig1.txt','assets/2023/state_graph_fig7.txt']" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Partial order" description="Figure 10. A labelled net modelling a partially ordered run." [link]="['assets/2023/model_fig1.txt','assets/2023/partial_order_2X_fig10.txt']" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Prime event structure" description="Figure 11. A labelled net modelling a prime event structure." [link]="['assets/2023/model_fig1.txt','assets/2023/prime_event_structure_fig11.txt']" [download]="true"></ilpn-descriptive-link>
 
-        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, extra tokens" description="The Petri net from Figure 1, with additional tokens." link="assets/model_fig12b.txt" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Firing sequence, extra token" description="Figure 12. A labeled net with complex initial marking." link="assets/specification_fig12b.txt" [download]="true"></ilpn-descriptive-link>
+<!--        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, multiple tokens" description="The Petri net from Figure 1, with tripple the initial marking." link="assets/2023/model_fig12a.txt" [download]="true"></ilpn-descriptive-link>-->
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Firing sequence, 3 tokens" description="Figure 12. A labelled net with 3 tokens in the initial marking." [link]="['assets/2023/model_fig12a.txt','assets/2023/specification_fig12a.txt']" [download]="true"></ilpn-descriptive-link>
 
-        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, without p3 and p5" description="The Petri net from Figure 1, without the places p3 and p5." link="assets/model_fig13.txt" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Labeled net, B xor BXB" description="Figure 13. A labeled net modeling an alternative between B and BXB." link="assets/specification_fig13a.txt" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Labeled net, loop with X" description="Figure 13. A labeled net modeling a loop with X." link="assets/specification_fig13b.txt" [download]="true"></ilpn-descriptive-link>
+<!--        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, extra tokens" description="The Petri net from Figure 1, with additional tokens." link="assets/2023/model_fig12b.txt" [download]="true"></ilpn-descriptive-link>-->
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Firing sequence, extra token" description="Figure 12. A labelled net with complex initial marking." [link]="['assets/2023/model_fig12b.txt','assets/2023/specification_fig12b.txt']" [download]="true"></ilpn-descriptive-link>
 
-        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, loop with Y" description="Figure 15. The first Petri net." link="assets/model_fig15a.txt" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Labeled net, loop with Y" description="Figure 15. The first labeled net." link="assets/specification_fig15a.txt" [download]="true"></ilpn-descriptive-link>
+<!--        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, without p3 and p5" description="The Petri net from Figure 1, without the places p3 and p5." link="assets/2023/model_fig13.txt" [download]="true"></ilpn-descriptive-link>-->
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Labelled net, B xor BXB" description="Figure 13. A labelled net modeling an alternative between B and BXB." [link]="['assets/2023/model_fig13.txt','assets/2023/specification_fig13a.txt']" [download]="true"></ilpn-descriptive-link>
+        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Labelled net, loop with X" description="Figure 13. A labelled net modeling a loop with X." [link]="['assets/2023/model_fig13.txt','assets/2023/specification_fig13b.txt']" [download]="true"></ilpn-descriptive-link>
 
-        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, arc weights" description="Figure 15. The second Petri net." link="assets/model_fig15b.txt" [download]="true"></ilpn-descriptive-link>
-        <ilpn-descriptive-link [fileDisplay]="FD_SPEC" title="Labeled net, arc weights" description="Figure 15. The second labeled net." link="assets/specification_fig15b.txt" [download]="true"></ilpn-descriptive-link>
+<!--        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, loop with Y" description="Figure 15. The first Petri net." link="assets/2023/model_fig15a.txt" [download]="true"></ilpn-descriptive-link>-->
+<!--        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Labelled net, loop with Y" description="Figure 15. The first labelled net." [link]="['assets/2023/model_fig15a.txt','assets/2023/specification_fig15a.txt']" [download]="true"></ilpn-descriptive-link>-->
+
+<!--        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Petri net, arc weights" description="Figure 15. The second Petri net." link="assets/2023/model_fig15b.txt" [download]="true"></ilpn-descriptive-link>-->
+<!--        <ilpn-descriptive-link [fileDisplay]="FD_PN" title="Labelled net, arc weights" description="Figure 15. The second labelled net." [link]="['assets/2023/model_fig15b.txt','assets/2023/specification_fig15b.txt']" [download]="true"></ilpn-descriptive-link>-->
     </div>
 
 </ilpn-page-layout>
