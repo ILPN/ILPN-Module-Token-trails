@@ -25,12 +25,10 @@ hr {
     margin-bottom: 8px;
 }
 
-.top-complement {
-    margin-top: 22px;
-}
-
 .dotted {
+    position: relative;
     border-style: dotted;
+    z-index: 1;
 }
 
 .drawing-area {
@@ -41,6 +39,44 @@ hr {
     border-color: lightgray;
 }
 
-.margin-bottom {
+.margin-top-missing {
+    margin-top: 80px;
+    margin-bottom: 120px;
+}
+
+.margin-bottom-missing {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.margin-divider-examples {
     margin-bottom: 16px;
+}
+
+.margin-divider-old-examples {
+    margin-top: 80px;
+    margin-bottom: 16px;
+}
+
+.upload-margin {
+    margin-top: 22px;
+    margin-bottom: 16px;
+}
+
+.pos-anchor {
+    position: relative;
+}
+
+.upload-position {
+    position: absolute;
+    z-index: 2;
+    top: -90px;
+}
+
+.inline-emoji {
+    font-size: x-large;
+}
+
+.red {
+    color: red;
 }

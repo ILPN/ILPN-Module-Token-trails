@@ -8,7 +8,8 @@
         "build:components": "ng build ilpn-components",
         "build-local:components": "npm run build:components && npm i ./dist/ilpn-components --save-optional",
         "build": "npm run build-local:components && ng build ilpn-module --base-href /ilovepetrinets/fox/",
-        "start": "npm run build-local:components && ng serve"
+        "start": "npm run build-local:components && ng serve",
+        "install-dependencies": "npm i"
     },
     "private": true,
     "dependencies": {
@@ -24,6 +25,7 @@
         "@angular/platform-browser-dynamic": "~13.1.0",
         "@angular/router": "~13.1.0",
         "client-zip": "~1.5.1",
+        "fast-xml-parser": "^4.3.3",
         "file-saver": "^2.0.5",
         "glpk.js": "^4.0.1",
         "object-hash": "^3.0.0",
